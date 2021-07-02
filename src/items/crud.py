@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from sql_app.items.models import Item
-from sql_app.items.schemas import ItemBase
+from src.items.models import Item
+from src.items.schemas import ItemBase
 
 
 def get_items(db: Session, skip: int = 0, limit: int = 100):

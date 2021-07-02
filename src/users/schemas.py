@@ -1,8 +1,8 @@
 from typing import List
 from pydantic import BaseModel
 
-from sql_app.items.schemas import Item
-from sql_app.companies.schemas import CompanyBase
+from src.items.schemas import Item
+from src.companies.schemas import CompanyBase
 
 
 class UserBase(BaseModel):

@@ -1,9 +1,9 @@
 from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
-from sql_app.companies.schemas import Company, CompanyCreate
-from sql_app.companies.crud import get_companies, get_company_by_name, create_company
-from sql_app.auth import get_db, get_schemaless_db
+from src.companies.schemas import Company, CompanyCreate
+from src.companies.crud import get_companies, get_company_by_name, create_company
+from src.auth import get_db, get_schemaless_db
 
 companies_router = APIRouter(
     prefix="/companies",

@@ -1,9 +1,9 @@
 from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends
-from sql_app.items.schemas import Item
-from sql_app.items.crud import get_items
-from sql_app.auth import get_db
+from src.items.schemas import Item
+from src.items.crud import get_items
+from src.auth import get_db
 
 items_router = APIRouter(
     prefix="/items",

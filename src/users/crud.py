@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
 
-from sql_app.items.models import Item
-from sql_app.items.schemas import ItemBase
+from src.items.models import Item
+from src.items.schemas import ItemBase
 
-from sql_app.users.models import User
-from sql_app.users.schemas import UserCreate
+from src.users.models import User
+from src.users.schemas import UserCreate
 
 
 def get_logged_in_user(db: Session, token: str):

@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from sql_app.companies.models import Company
-from sql_app.companies. schemas import CompanyCreate
+from src.companies.models import Company
+from src.companies. schemas import CompanyCreate
 
 
 def get_company(db: Session, company_id: int):

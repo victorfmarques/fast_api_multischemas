@@ -1,12 +1,12 @@
 from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
-from sql_app.auth import get_db, oauth2_scheme, get_schemaless_db
+from src.auth import get_db, oauth2_scheme, get_schemaless_db
 
-from sql_app.companies import crud as companies_crud
+from src.companies import crud as companies_crud
 
-from sql_app.users.schemas import User, UserCreate
-from sql_app.users import crud
+from src.users.schemas import User, UserCreate
+from src.users import crud
 
 
 users_router = APIRouter(
