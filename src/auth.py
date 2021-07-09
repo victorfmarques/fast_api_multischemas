@@ -11,7 +11,17 @@ from src.company.models import Company
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
-def retrieve_user_by_token(token: str,  db: Session):
+def get_public_db():
+    db = SessionLocal()
+    try:
+        yield db
+    except Exception as e:
+        print('Error: ' + str(e))
+    finally:
+        db.close()
+
+
+def retrieve_user_by_token(db: Session = Depends(get_public_db), token: str = Depends(oauth2_scheme)):
     try:
         user = db.query(User).filter(User.token == token).first()
         return user
@@ -20,12 +30,12 @@ def retrieve_user_by_token(token: str,  db: Session):
         return None
 
 
-def get_current_user(token: str = Depends(oauth2_scheme)):
-    return retrieve_user_by_token(token)
+def get_current_user(user: User = Depends(retrieve_user_by_token)):
+    return user
 
 
 def get_current_company_schema(user: User = Depends(get_current_user)):
-    return Company(id=user.company).schema_name
+    return user.company.schema_name
 
 
 def get_schemaless_db():
@@ -43,7 +53,7 @@ def get_db(company_schema: str = Depends(get_current_company_schema)):
     if company_schema:
         db.connection(
             execution_options={
-                "schema_translate_map": {"per_user": company_schema}
+                "schema_translate_map": {None: company_schema}
             }
         )
     else:
@@ -52,6 +62,6 @@ def get_db(company_schema: str = Depends(get_current_company_schema)):
     try:
         yield db
     except Exception as e:
-        print('Error: ' + str(type(e)))
+        print('Error: ' + str(e))
     finally:
         db.close()
