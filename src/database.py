@@ -1,34 +1,39 @@
+import os
+import databases
 from sqlalchemy import create_engine, inspect
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.schema import CreateSchema
 
-# SQLALCHEMY_DATABASE_URL = "sqlite:///./src.db"
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/fast_api_multischemas"
+
+def get_database_url():
+    host = os.getenv("DB_HOST", None)
+    port = os.getenv("DB_PORT", None)
+    db = os.getenv("DB_NAME", None)
+    user = os.getenv("DB_USER", None)
+    password = os.getenv("DB_PASSWORD", None)
+    return f"postgresql://{user}:{password}@{host}:{port}/{db}"
+
+
+database = databases.Database(get_database_url())
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL
+    get_database_url(),
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
+Base.metadata.create_all(engine)
+
 
 def create_schema(schema_name: str):
-    """
-        Creates a new postgres schema
-        - **schema_name**: name of the new schema to create
-    """
     if not engine.dialect.has_schema(engine, schema_name):
         engine.execute(CreateSchema(schema_name))
         return True
 
 
 def create_tables(schema_name: str):
-    """
-        Create new tables for postgres schema
-        - **schema_name**: schema in which tables are to be created
-    """
     from src.items.models import Item
 
     if (

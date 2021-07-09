@@ -29,6 +29,7 @@ pip install -r requirements.txt
 ```
 #
 ### **Running the project**
+##
 To run the project on your localhost it's necessary to have a local PostgreSQL instance. Database properties defined in:
 ```sh
 src/database.py
@@ -40,9 +41,23 @@ After checking the configurations and etc, you can finally run the project:
 ```sh
 uvircorn src.main:app
 ```
+#
+### **Running the project with Docker**
+##
+Build docker-compose file
+```sh
+docker-compose build
+```
+
+##
+Run the server
+```sh
+docker-compose up
+```
+
 
 ### **Project goals**:
-- [ ] Run with docker
+- [x] Run with docker
 - [x] Multi-tenancy on PSQL Schemas
 - [ ] Middleware implementation (Authentication and Schema directioner)
 - [ ] Unit tests
