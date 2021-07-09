@@ -43,7 +43,8 @@ uvircorn src.main:app
 
 ### **Project goals**:
 - [ ] Run with docker
-- [ ] Multi-tenancy on PSQL Schemas
+- [x] Multi-tenancy on PSQL Schemas
+- [ ] Middleware implementation (Authentication and Schema directioner)
 - [ ] Unit tests
 
 
