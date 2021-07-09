@@ -2,7 +2,7 @@ from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 from src.company.schemas import Company, CompanyCreate
-from src.company.crud import get_company, get_company_by_name, create_company
+from src.company.crud import get_company, get_company_by_name, get_company_by_id, create_company
 from src.auth import get_schemaless_db
 
 company_router = APIRouter(
@@ -30,7 +30,7 @@ def list_company(skip: int = 0, limit: int = 100, db: Session = Depends(get_sche
 
 @company_router.get("/{company_id}", response_model=Company)
 def retrieve_company(company_id: int, db: Session = Depends(get_schemaless_db)):
-    db_company = get_company(db, company_id=company_id)
+    db_company = get_company_by_id(db, id=company_id)
     if db_company is None:
         raise HTTPException(status_code=404, detail="Company not found")
     return db_company

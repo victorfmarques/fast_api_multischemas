@@ -10,7 +10,6 @@ class CompanyCreate(BaseModel):
 
 
 class Company(CompanyBase, CompanyCreate):
-    token: str
 
     class Config:
         orm_mode = True

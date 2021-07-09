@@ -33,7 +33,7 @@ def get_schemaless_db():
     try:
         yield db
     except Exception as e:
-        print('Error: ' + str(type(e)))
+        print('Error: ' + str(e))
     finally:
         db.close()
 
