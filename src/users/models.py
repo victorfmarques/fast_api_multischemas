@@ -17,4 +17,3 @@ class User(Base):
 
     company_id = Column(Integer, ForeignKey('company.id'))
     company = relationship("Company", foreign_keys=company_id)
-    items = relationship("Item", back_populates="owner")
