@@ -1,7 +1,7 @@
 from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
-from src.auth import get_db, oauth2_scheme, get_schemaless_db
+from src.auth import oauth2_scheme, get_schemaless_db
 
 from src.company import crud as company_crud
 
@@ -48,11 +48,3 @@ def read_user(user_id: int, db: Session = Depends(get_schemaless_db)):
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
-
-
-'''
-@users_router.post("/{user_id}/items/", response_model=Item)
-def create_item_for_user(
-    user_id: int, item: ItemBase, db: Session = Depends(get_db)
-):
-    return create_user_item(db=db, item=item, user_id=user_id)'''

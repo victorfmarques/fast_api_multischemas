@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 from src.company.schemas import Company, CompanyCreate
 from src.company.crud import get_company, get_company_by_name, create_company
-from src.auth import get_db, get_schemaless_db
+from src.auth import get_schemaless_db
 
 company_router = APIRouter(
     prefix="/company",
@@ -24,8 +24,8 @@ def create_company(company: CompanyCreate, db: Session = Depends(get_schemaless_
 
 @company_router.get("/", response_model=List[Company])
 def list_company(skip: int = 0, limit: int = 100, db: Session = Depends(get_schemaless_db)):
-    items = get_company(db, skip=skip, limit=limit)
-    return items
+    companies = get_company(db, skip=skip, limit=limit)
+    return companies
 
 
 @company_router.get("/{company_id}", response_model=Company)

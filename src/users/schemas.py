@@ -1,9 +1,6 @@
 from typing import List
 from pydantic import BaseModel
 
-from src.items.schemas import Item
-from src.company.schemas import CompanyBase
-
 
 class UserBase(BaseModel):
     name: str
