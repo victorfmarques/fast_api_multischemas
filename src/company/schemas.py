@@ -9,8 +9,11 @@ class CompanyCreate(BaseModel):
     name: str
 
 
+class CompanySchema(CompanyBase):
+    schema_name: str
+
+
 class Company(CompanyBase, CompanyCreate):
-    token: str
 
     class Config:
         orm_mode = True
