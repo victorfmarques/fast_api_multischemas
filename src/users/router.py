@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 from src.auth import get_db, oauth2_scheme, get_schemaless_db
 
-from src.companies import crud as companies_crud
+from src.company import crud as company_crud
 
 from src.users.schemas import User, UserCreate
 from src.users import crud
@@ -25,7 +25,7 @@ def list_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_schema
 
 @users_router.post("/", response_model=User)
 def create_user(user: UserCreate, db: Session = Depends(get_schemaless_db)):
-    db_company = companies_crud.get_company(db=db, company_id=user.company.id)
+    db_company = company_crud.get_company(db=db, company_id=user.company.id)
     if not db_company:
         raise HTTPException(
             status_code=400, detail="Company informed doesn't exists")

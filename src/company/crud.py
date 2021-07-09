@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from src.companies.models import Company
-from src.companies. schemas import CompanyCreate
+from src.company.models import Company
+from src.company. schemas import CompanyCreate
 
 
 def get_company(db: Session, company_id: int):
@@ -12,7 +12,7 @@ def get_company_by_name(db: Session, name: str):
     return db.query(Company).filter(Company.name == name).first()
 
 
-def get_companies(db: Session, skip: int = 0, limit: int = 100):
+def get_company(db: Session, skip: int = 0, limit: int = 100):
     return db.query(Company).offset(skip).limit(limit).all()
 
 

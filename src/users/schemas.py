@@ -2,7 +2,7 @@ from typing import List
 from pydantic import BaseModel
 
 from src.items.schemas import Item
-from src.companies.schemas import CompanyBase
+from src.company.schemas import CompanyBase
 
 
 class UserBase(BaseModel):
