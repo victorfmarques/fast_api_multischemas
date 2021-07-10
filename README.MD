@@ -59,6 +59,7 @@ docker-compose up
 ### **Project goals**:
 - [x] Run with docker
 - [x] Multi-tenancy on PSQL Schemas
+- [ ] Database migrations management with Alembic
 - [ ] Middleware implementation (Authentication and Schema directioner)
 - [ ] Unit tests
 
