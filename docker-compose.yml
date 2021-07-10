@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+    app:
+        restart: unless-stopped
+        container_name: fastapi
+        build:
+            context: .
+        command: >
+            sh -c "uvicorn src.main:app --host 0.0.0.0 --port 8000"
+        ports:
+            - 8000:8000
+        environment: 
+            - DB_HOST=db
+            - DB_PORT=5432
+            - DB_NAME=fast_api_multischemas
+            - DB_USER=postgres
+            - DB_PASSWORD=postgres
+        links:
+            - db
+    db:
+        container_name: psql_db
+        image: postgres:10-alpine
+        ports:
+            - 5432:5432
+        environment: 
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=fast_api_multischemas
