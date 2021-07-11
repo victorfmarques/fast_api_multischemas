@@ -60,6 +60,7 @@ docker-compose up
 - [x] Run with docker
 - [x] Multi-tenancy on PSQL Schemas
 - [ ] Database migrations management with Alembic
+- [ ] Restructure folders, from django-like to fastapi-like
 - [ ] Middleware implementation (Authentication and Schema directioner)
 - [ ] Unit tests
 
