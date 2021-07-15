@@ -7,11 +7,11 @@ from sqlalchemy.schema import CreateSchema
 
 
 def get_database_url():
-    host = os.getenv("DB_HOST", None)
-    port = os.getenv("DB_PORT", None)
-    db = os.getenv("DB_NAME", None)
-    user = os.getenv("DB_USER", None)
-    password = os.getenv("DB_PASSWORD", None)
+    host = os.getenv("DB_HOST", 'localhost')
+    port = os.getenv("DB_PORT", '5432')
+    db = os.getenv("DB_NAME", 'ooooooo')
+    user = os.getenv("DB_USER", 'postgres')
+    password = os.getenv("DB_PASSWORD", 'postgres')
     return f"postgresql://{user}:{password}@{host}:{port}/{db}"
 
 
@@ -24,7 +24,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
-Base.metadata.create_all(engine)
+# Base.metadata.create_all(engine)
 
 
 def create_schema(schema_name: str):

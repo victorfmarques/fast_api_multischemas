@@ -14,6 +14,7 @@ class User(Base):
     token = Column(String, nullable=False)
 
     is_active = Column(Boolean, default=True)
+    is_admin = Column(Boolean, default=False)
 
     company_id = Column(Integer, ForeignKey('company.id'))
     company = relationship("Company", foreign_keys=company_id)
